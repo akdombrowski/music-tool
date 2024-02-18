@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { urlForImage } from "lib/sanity.image";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface CoverImageProps {
@@ -23,9 +23,12 @@ export default function CoverImage(props: CoverImageProps) {
         height={1000}
         alt=""
         src={urlForImage(source).height(1000).width(2000).url()}
-        sizes="100vw"
         priority={priority}
-      />
+        sizes="100vw"
+        style={{
+          maxWidth: "100%",
+          height: "auto"
+        }} />
     </div>
   ) : (
     <div style={{ paddingTop: "50%", backgroundColor: "#ddd" }} />

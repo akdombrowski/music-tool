@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { memo, useSyncExternalStore } from "react";
 
@@ -50,7 +50,10 @@ export default memo(function IntroTemplate() {
           <Image
             alt="An illustration of a browser window, a terminal window, the Sanity.io logo and the NextJS logo"
             src={cover}
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
           <div className="mt-10 hidden px-14 text-xs text-gray-700 md:block">
             <RemoveBlock url={removeBlockURL} />
           </div>

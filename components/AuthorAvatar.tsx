@@ -1,6 +1,6 @@
 import { urlForImage } from "lib/sanity.image";
 import type { Author } from "lib/sanity.queries";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function AuthorAvatar(props: Author) {
   const { name, picture } = props;
@@ -17,7 +17,10 @@ export default function AuthorAvatar(props: Author) {
           height={96}
           width={96}
           alt={picture?.alt ?? name}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
       <div className="text-xl font-bold text-balance">{name}</div>
     </div>
