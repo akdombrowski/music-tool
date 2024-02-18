@@ -1,46 +1,46 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { memo, useSyncExternalStore } from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import { memo, useSyncExternalStore } from "react";
 
-import cover from './cover.png'
+import cover from "./cover.png";
 
-const subscribe = () => () => {}
+const subscribe = () => () => {};
 
 export default memo(function IntroTemplate() {
   const studioURL = useSyncExternalStore(
     subscribe,
     () => `${window.location.origin}/studio`,
-    () => null,
-  )
+    () => null
+  );
   const createPostURL = useSyncExternalStore(
     subscribe,
     () =>
       `${window.location.origin}/studio/intent/create/template=post;type=post/`,
-    () => null,
-  )
+    () => null
+  );
   const isLocalHost = useSyncExternalStore(
     subscribe,
-    () => window.location.hostname === 'localhost',
-    () => false,
-  )
+    () => window.location.hostname === "localhost",
+    () => false
+  );
   const hasUTMtags = useSyncExternalStore(
     subscribe,
-    () => window.location.search.includes('utm'),
-    () => false,
-  )
+    () => window.location.search.includes("utm"),
+    () => false
+  );
 
-  const hasEnvFile = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const hasEnvFile = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const hasRepoEnvVars =
     process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER &&
     process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER &&
-    process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG
-  const repoURL = `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`
+    process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG;
+  const repoURL = `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`;
   const removeBlockURL = hasRepoEnvVars
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}/blob/main/README.md#how-can-i-remove-the-next-steps-block-from-my-blog`
-    : `https://github.com/sanity-io/nextjs-blog-cms-sanity-v3#how-can-i-remove-the-next-steps-block-from-my-blog`
+    : `https://github.com/sanity-io/nextjs-blog-cms-sanity-v3#how-can-i-remove-the-next-steps-block-from-my-blog`;
 
   if (hasUTMtags || !studioURL) {
-    return
+    return;
   }
 
   return (
@@ -64,18 +64,16 @@ export default memo(function IntroTemplate() {
           {!hasEnvFile && (
             <div
               className="mb-6 rounded-lg bg-yellow-100 p-4 text-sm text-yellow-700"
-              role="alert"
-            >
+              role="alert">
               {`It looks like you haven't set up the local environment variables.`}
               <p>
                 <a
                   href={
-                    'https://github.com/sanity-io/nextjs-blog-cms-sanity-v3#step-2-set-up-the-project-locally'
+                    "https://github.com/sanity-io/nextjs-blog-cms-sanity-v3#step-2-set-up-the-project-locally"
                   }
                   className={`mx-1 underline hover:text-blue-800`}
                   target="_blank"
-                  rel="noreferrer"
-                >
+                  rel="noreferrer">
                   {`Here's how to set them up locally`}
                 </a>
               </p>
@@ -94,8 +92,7 @@ export default memo(function IntroTemplate() {
                     Your Sanity Studio is deployed at
                     <Link
                       className="mx-1 underline hover:text-blue-800"
-                      href={studioURL}
-                    >
+                      href={studioURL}>
                       {studioURL}
                     </Link>
                   </div>
@@ -103,8 +100,7 @@ export default memo(function IntroTemplate() {
                   <div className="mt-3">
                     <Link
                       className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
-                      href={createPostURL}
-                    >
+                      href={createPostURL}>
                       Go to Sanity Studio
                     </Link>
                   </div>
@@ -136,8 +132,7 @@ export default memo(function IntroTemplate() {
                           className="mx-1 underline hover:text-blue-800"
                           href={repoURL}
                           target="_blank"
-                          rel="noreferrer"
-                        >
+                          rel="noreferrer">
                           {repoURL}
                         </a>
                       </div>
@@ -147,8 +142,7 @@ export default memo(function IntroTemplate() {
                           className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
                           href={repoURL}
                           target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                          rel="noopener noreferrer">
                           Go to {getGitProvider()} repo
                         </a>
                       </div>
@@ -195,15 +189,15 @@ export default memo(function IntroTemplate() {
         </div>
       </div>
     </div>
-  )
-})
+  );
+});
 
 function Box({
   circleTitle,
   element,
 }: {
-  circleTitle: string
-  element: JSX.Element
+  circleTitle: string;
+  element: JSX.Element;
 }) {
   return (
     <li className="mt-2 grid grid-flow-col grid-rows-1 place-content-start gap-3">
@@ -214,7 +208,7 @@ function Box({
       </div>
       {element}
     </li>
-  )
+  );
 }
 
 function BlueLink({ href, text }: { href: string; text: string }) {
@@ -223,11 +217,10 @@ function BlueLink({ href, text }: { href: string; text: string }) {
       href={href}
       className="text-blue-500 underline hover:text-blue-800"
       target="_blank"
-      rel="noreferrer"
-    >
+      rel="noreferrer">
       {text}
     </a>
-  )
+  );
 }
 
 const RemoveBlock = ({ url }) => (
@@ -235,19 +228,18 @@ const RemoveBlock = ({ url }) => (
     className="hover:text-blue-800"
     href={url}
     target="_blank"
-    rel="noreferrer"
-  >
+    rel="noreferrer">
     How to remove this block?
   </a>
-)
+);
 
 function getGitProvider() {
   switch (process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER) {
-    case 'gitlab':
-      return 'GitLab'
-    case 'bitbucket':
-      return 'Bitbucket'
+    case "gitlab":
+      return "GitLab";
+    case "bitbucket":
+      return "Bitbucket";
     default:
-      return 'GitHub'
+      return "GitHub";
   }
 }
