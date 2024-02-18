@@ -1,17 +1,17 @@
-import { defineType, defineArrayMember } from 'sanity'
+import { defineType, defineArrayMember } from "sanity";
 
 export const blockContentType = defineType({
-  name: 'blockContent',
-  type: 'array',
-  title: 'Body',
+  name: "blockContent",
+  type: "array",
+  title: "Body",
   of: [
     defineArrayMember({
-      type: 'block',
+      type: "block",
     }),
     defineArrayMember({
-      type: 'youTube',
+      type: "youTube",
     }),
   ],
-})
+});
 
 export default blockContentType;

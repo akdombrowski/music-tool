@@ -1,4 +1,4 @@
 interface YouTube {
-  _type: 'youtube'
+  _type: "youtube";
   // ...other fields
 }

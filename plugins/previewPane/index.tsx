@@ -4,34 +4,34 @@
 // It's part of the Studio's “Structure Builder API” and is documented here:
 // https://www.sanity.io/docs/structure-builder-reference
 
-import { DRAFT_MODE_ROUTE } from 'lib/sanity.api'
-import type { DefaultDocumentNodeResolver } from 'sanity/structure'
-import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
-import authorType from 'schemas/author'
-import postType from 'schemas/post'
+import { DRAFT_MODE_ROUTE } from "lib/sanity.api";
+import type { DefaultDocumentNodeResolver } from "sanity/structure";
+import { Iframe, IframeOptions } from "sanity-plugin-iframe-pane";
+import authorType from "schemas/author";
+import postType from "schemas/post";
 
-import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
+import AuthorAvatarPreviewPane from "./AuthorAvatarPreviewPane";
 
 const iframeOptions = {
   url: {
-    origin: 'same-origin',
+    origin: "same-origin",
     preview: (document) => {
       if (!document) {
-        return new Error('Missing document')
+        return new Error("Missing document");
       }
       switch (document._type) {
-        case 'post':
+        case "post":
           return (document as any)?.slug?.current
             ? `/posts/${(document as any).slug.current}`
-            : new Error('Missing slug')
+            : new Error("Missing slug");
         default:
-          return new Error(`Unknown document type: ${document?._type}`)
+          return new Error(`Unknown document type: ${document?._type}`);
       }
     },
     draftMode: DRAFT_MODE_ROUTE,
   },
   reload: { button: true },
-} satisfies IframeOptions
+} satisfies IframeOptions;
 
 export const previewDocumentNode = (): DefaultDocumentNodeResolver => {
   return (S, { schemaType }) => {
@@ -46,16 +46,16 @@ export const previewDocumentNode = (): DefaultDocumentNodeResolver => {
                 picture={document.displayed.picture as any}
               />
             ))
-            .title('Preview'),
-        ])
+            .title("Preview"),
+        ]);
 
       case postType.name:
         return S.document().views([
           S.view.form(),
-          S.view.component(Iframe).options(iframeOptions).title('Preview'),
-        ])
+          S.view.component(Iframe).options(iframeOptions).title("Preview"),
+        ]);
       default:
-        return null
+        return null;
     }
-  }
-}
+  };
+};
