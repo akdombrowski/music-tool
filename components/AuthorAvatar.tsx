@@ -1,6 +1,6 @@
 import { urlForImage } from "lib/sanity.image";
 import type { Author } from "lib/sanity.queries";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function AuthorAvatar(props: Author) {
   const { name, picture } = props;
