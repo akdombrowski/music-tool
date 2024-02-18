@@ -95,7 +95,8 @@ export default memo(function IntroTemplate() {
                     Your Sanity Studio is deployed at
                     <Link
                       className="mx-1 underline hover:text-blue-800"
-                      href={studioURL}>
+                      href={studioURL}
+                      legacyBehavior>
                       {studioURL}
                     </Link>
                   </div>
